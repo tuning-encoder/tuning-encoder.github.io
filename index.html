@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="Encoder for Fast Personalization of Text-to-Image Models">
+  <meta name="keywords" content="Textual Inversion, Text-to-Image, Personalized Generation">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Encoder-based Domain Tuning for Fast Personalization of Text-to-Image Models</title>
+
+<!--   Global site tag (gtag.js) - Google Analytics-->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-QVM9XP0Q0C"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-QVM9XP0Q0C');
+  </script>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+<body>
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">Encoder-based Domain Tuning for Fast Personalization of Text-to-Image Models</h1>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              Anonymous Authors
+            </span>
+          </div>
+
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- PDF Link. -->
+              <span class="link-block">
+                <a href="https://arxiv.org/abs/2208.01618"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper (Coming soon)</span>
+                </a>
+              </span>
+
+              <!-- Code Link. -->
+              <span class="link-block">
+                <a href="https://github.com/tuning-encoder/tuning-encoder.github.io"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code (Coming soon)</span>
+                  </a>
+              </span>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="hero teaser">
+  <div class="container is-widescreen">
+    <div class="hero-body">
+      <!-- <div id="results-carousel" class="carousel results-carousel"> -->
+      <div class="container">
+      <div class="item">
+      <div class="column is-centered has-text-centered">
+        <img src="static/images/teaser.JPG" alt="Teaser."/>
+
+      <h2 class="subtitle">
+	 We use an encoder to personalize a text-to-image model to new concepts with a single image and 5-15 tuning steps. </h2>
+	  </div>
+    </div>
+  </div>
+ <!--  </div> -->
+  </div>
+  </div>
+ <!--  </div> -->
+</section>
+
+<section class="section hero is-light">
+  <div class="container is-max-desktop">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <!-- div class="item">
+          <p style="margin-bottom: 30px">
+        <video poster="" id="tree" autoplay controls muted loop height="100%">
+          <source src="static/figures/video.mp4"
+          type="video/mp4">
+        </video>
+        </p>
+        </div -->
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+<p>
+          Text-to-image personalization aims to teach a pre-trained diffusion model to reason about novel, user provided concepts, embedding them into new scenes guided by natural language prompts.
+          However, current personalization approaches struggle with lengthy training times, high storage requirements or loss of identity.
+          To overcome these limitations, we propose an encoder-based <i>domain-tuning</i> approach. Our key insight is that by <i>underfitting</i> on a large set of concepts from a given domain, we can improve generalization and create a model that is more amenable to quickly adding novel concepts from the same domain.
+            Specifically, we employ two components: First, an <b>encoder</b> that takes as an input a single image of a target concept from a given domain, <i>e.g.</i>, a specific face, and learns to map it into a word-embedding representing the concept.
+            Second, a set of regularized <b>weight-offsets</b> for the text-to-image model that learn how to effectively injest additional concepts.
+            Together, these components are used to guide the learning of unseen concepts, allowing us to personalize a model using only a single image and as few as 5 training steps --- accelerating personalization <b>from dozens of minutes to seconds</b>, while preserving quality. </p>
+        </div>
+      </div>
+    </div>
+    <!--/ Abstract. -->
+  </div>
+</section>
+
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">How does it work?</h2>
+        <div class="content has-text-justified">
+        </div>
+        <div class="column is-centered has-text-centered">
+        <img id="architecture" src="static/images/overview.JPG"/>
+      </div>
+        <div class="content has-text-justified">
+<p>
+          We propose a two-component method for fast personalization of text-to-image diffusion models.
+          First, a domain-specific encoder that learns to quickly map images into word-embeddings that represent them. Two, a set of weight-offsets that draw the diffusion model towards the same domain, allowing for easier personalization to novel concepts from this domain.
+          We pre-train these components on a large dataset from the given domain. At inference time, we can use them to guide optimization for a specific concept, for example our own pet cat.
+</p><p>
+          The result is a tuning-approach that requires as few as 5 training steps in order to personalize the diffusion model, reducing optimization times from dozens of minutes to a few seconds.
+          Importantly, this puts personalization times in-line with the time it takes to generate a batch of images, eliminating the need to save a model for every new concept.
+        </p>
+        </div>
+      </div>
+    </div>
+    <!--/ Abstract. -->
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container is-widescreen">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Comparisons to Prior Work</h2>
+        <div class="content has-text-justified">
+        </div>
+        <div class="column is-centered has-text-centered is-widescreen">
+        <img id="face_comps" src="static/images/faces_comparison.JPG"/>
+      </div>
+        <div class="content has-text-justified">
+          <p>Comparisons with prior personalization methods. We show (left to right): The image used for 1-shot personalizations, the result of prompting Stable Diffusion with the researcher's name, the results of personalization with Textual Inversion and DreamBooth<sup>*</sup> using 1- and 5-images respectively, the results of training a DreamBooth model and an embedding concurrently on 5 images, and finally our own result and the driving prompt. Our method achieves comparable or better quality with only a single image and a fraction of the time.</p>
+          <p><sup>*</sup>DreamBooth has no publicly released code. We use a <a href="https://huggingface.co/docs/diffusers/training/dreambooth">community implementation</a> which follows the paper and tunes only the U-Net. </p>
+
+        </div>
+      </div>
+    </div>
+    <!--/ Abstract. -->
+  </div>
+</section>
+
+<section class="hero is-light is-small">
+  <div class="container is-max-desktop is-centered">
+
+      <div class="section-title is-centered has-text-centered">
+        <br>
+        <h2 class="title is-3 is-centered">Additional Domains</h2>
+        <div class="content has-text-justified">
+        </div>
+      </div>
+
+    <div class="columns is-centered">
+
+      <!-- Cross domain. -->
+      <div class="column">
+        <div class="content">
+            <div class="publication-img">
+              <img id="styles" src="static/images/styles.JPG"/>
+            </div>
+        </div>
+      </div>
+
+      <!--/ Cross domain. -->
+      <div class="column">
+        <div class="content">
+            <div class="publication-img">
+              <img id="cats" src="static/images/cats.JPG"/>
+            </div>
+        </div>
+      </div>
+
+      <!-- New domain editing. -->
+    </div>
+    <div class="content is-desktop has-text-justified">
+        <p>Our approach works for non-facial domains, and even extends to abstract concepts like artistic styles. Here, we show results with encoders trained on WikiArt (left) and LSUN-Cat (right) respectively.</p>
+        <p>Style input image credits: <a href="https://www.deviantart.com/qinni">QinniArt</a> (top), <a href="https://commons.wikimedia.org/wiki/User:Deevad">David Revoy</a> (bottom). Image reproduction authorized for non-commercial use only.</p>
+        <br>
+    </div>
+      <!--/ New domain editing. -->
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+
+      <div class="section-title is-centered has-text-centered">
+        <br>
+        <h2 class="title is-3">Limitations</h2>
+        <div class="content has-text-justified">
+        </div>
+      </div>
+
+    <div class="columns is-centered">
+
+      <!-- Cross domain. -->
+      <div class="column">
+        <div class="content">
+
+
+            <div class="publication-img">
+              <img id="limitations_cats" src="static/images/limitations_cats.JPG"/>
+            </div>
+        </div>
+      </div>
+
+      <!--/ Cross domain. -->
+      <div class="column">
+        <div class="content">
+            <div class="publication-img">
+              <img id="limitations_faces" src="static/images/limitations_face.JPG"/>
+            </div>
+        </div>
+      </div>
+
+      <!-- New domain editing. -->
+    </div>
+    <div class="content is-desktop has-text-justified">
+      <p>
+Our encoders learn to generalize from large datasets that represent the coarse target class. As such, they are only applicable for classes where large datasets exist. Here show the effects of trying to personalize out-of-domain images using our method. When the concepts are from nearby domains (dogs, inverted with a model trained on cats), the method can still produce high-fidelity results. For farther domains (a wooden toy) the method fails to capture concept-specific details.
+</p><p>
+A further limitation is in increased VRAM requirements. In order to perform inference-time tuning, the same machine used for generation should be powerful enough to tune the model. Moreover, as the encoder and text-to-image models must be tuned in tandem, this process requires more memory than direct fine-tuning approaches.
+      </p>
+         </div>
+      <!--/ New domain editing. -->
+  </div>
+</section>
+
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">BibTeX</h2>
+    <p>If you find our work useful, please cite our paper:</p>
+    <pre><code>Coming soon
+}</code></pre>
+  </div>
+</section>
+<footer class="footer">
+  <div class="container">
+    <div class="content has-text-centered">
+      <a class="icon-link"
+         href="coming soon">
+        <i class="fas fa-file-pdf"></i>
+      </a>
+      <a class="icon-link" href="https://github.com/tuning-encoder/tuning-encoder.github.io" class="external-link" disabled>
+        <i class="fab fa-github"></i>
+      </a>
+    </div>
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>
+            This website is licensed under a <a rel="license"
+                                                href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
+            Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+          <p>
+            Website source code based on the <a href="https://nerfies.github.io/"> Nerfies</a> project page. If you want to reuse their <a
+              href="https://github.com/nerfies/nerfies.github.io">source code</a>, please credit them appropriately.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
