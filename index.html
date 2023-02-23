@@ -89,6 +89,15 @@
 
 <section class="hero teaser">
   <div class="container is-widescreen">
+    <div class="container is-max-desktop is-centered has-text-centered">
+      <h2 class="subtitle">
+	 TL;DR: We use an encoder to personalize a text-to-image model to new concepts with a single image and 5-15 tuning steps. </h2><br>
+    <video id="teaser" autoplay controls muted loop height="80%">
+        <source src="static/videos/e4t_corgi.mp4"
+                type="video/mp4">
+      </video>
+      </div>
+    <br>
     <div class="hero-body">
       <!-- <div id="results-carousel" class="carousel results-carousel"> -->
       <div class="container">
@@ -96,8 +105,6 @@
       <div class="column is-centered has-text-centered">
         <img src="static/images/teaser.JPG" alt="Teaser."/>
 
-      <h2 class="subtitle">
-	 We use an encoder to personalize a text-to-image model to new concepts with a single image and 5-15 tuning steps. </h2>
 	  </div>
     </div>
   </div>
@@ -156,7 +163,7 @@
           We pre-train these components on a large dataset from the given domain. At inference time, we can use them to guide optimization for a specific concept, for example our own pet cat.
 </p><p>
           The result is a tuning-approach that requires as few as 5 training steps in order to personalize the diffusion model, reducing optimization times from dozens of minutes to a few seconds.
-          Importantly, this puts personalization times in-line with the time it takes to generate a batch of images, eliminating the need to save a model for every new concept.
+          This puts personalization times in-line with the time it takes to generate a batch of images, eliminating the need to save a model for every new concept.
         </p>
         </div>
       </div>
@@ -178,8 +185,8 @@
         <img id="face_comps" src="static/images/faces_comparison.JPG"/>
       </div>
         <div class="content has-text-justified">
-          <p>Comparisons with prior personalization methods. We show (left to right): The image used for 1-shot personalizations, the result of prompting Stable Diffusion with the researcher's name, the results of personalization with Textual Inversion and DreamBooth<sup>*</sup> using 1- and 5-images respectively, the results of training a DreamBooth model and an embedding concurrently on 5 images, and finally our own result and the driving prompt. Our method achieves comparable or better quality with only a single image and a fraction of the time.</p>
-          <p><sup>*</sup>DreamBooth has no publicly released code. We use a <a href="https://huggingface.co/docs/diffusers/training/dreambooth">community implementation</a> which follows the paper and tunes only the U-Net. </p>
+          <p>Comparisons with prior personalization methods. We show (left to right): An image of a researcher used for 1-shot personalization, the result of prompting Stable Diffusion with the researcher's name, the results of personalization with Textual Inversion and DreamBooth<sup>*</sup> using 1- and 5-images respectively, the results of training a DreamBooth model and an embedding concurrently on 5 images, and finally our own result and the driving prompt. Our method achieves comparable or better quality with only a single image and a fraction of the time.</p>
+          <p><sup>*</sup>We use the <a href="https://huggingface.co/docs/diffusers/training/dreambooth">HuggingFace implementation</a> which follows the paper and tunes only the U-Net. </p>
 
         </div>
       </div>
@@ -222,7 +229,7 @@
     </div>
     <div class="content is-desktop has-text-justified">
         <p>Our approach works for non-facial domains, and even extends to abstract concepts like artistic styles. Here, we show results with encoders trained on WikiArt (left) and LSUN-Cat (right) respectively.</p>
-        <p>Style input image credits: <a href="https://www.deviantart.com/qinni">QinniArt</a> (top), <a href="https://commons.wikimedia.org/wiki/User:Deevad">David Revoy</a> (bottom). Image reproduction authorized for non-commercial use only.</p>
+        <p>Image credits: <a href="https://www.deviantart.com/qinni" style="color: #3366CC;">QinniArt</a>, <a href="https://commons.wikimedia.org/wiki/User:Deevad" style="color: #3366CC;">David Revoy</a>, <a href="https://unsplash.com/photos/bhonzdJMVjY" style="color: #3366CC;">Jeanie</a></p>
         <br>
     </div>
       <!--/ New domain editing. -->
@@ -265,23 +272,63 @@
     </div>
     <div class="content is-desktop has-text-justified">
       <p>
-Our encoders learn to generalize from large datasets that represent the coarse target class. As such, they are only applicable for classes where large datasets exist. Here show the effects of trying to personalize out-of-domain images using our method. When the concepts are from nearby domains (dogs, inverted with a model trained on cats), the method can still produce high-fidelity results. For farther domains (a wooden toy) the method fails to capture concept-specific details.
+The encoders learn to generalize from large datasets that represent the coarse target class. As such, they are only applicable for classes where large datasets exist. We show the effects of trying to personalize out-of-domain images using our method. When the concepts are from nearby domains (dogs, inverted with a model trained on cats), the method can still produce high-fidelity results. For farther domains (a wooden toy) the method fails to capture concept-specific details.
 </p><p>
-A further limitation is in increased VRAM requirements. In order to perform inference-time tuning, the same machine used for generation should be powerful enough to tune the model. Moreover, as the encoder and text-to-image models must be tuned in tandem, this process requires more memory than direct fine-tuning approaches.
+The method also significantly increases VRAM requirements. In order to perform inference-time tuning, the same machine used for generation should be powerful enough to tune the model. Moreover, as the encoder and text-to-image models must be tuned in tandem, this process requires more memory than direct fine-tuning approaches.
       </p>
          </div>
       <!--/ New domain editing. -->
   </div>
 </section>
 
-<section class="section" id="BibTeX">
-  <div class="container is-max-desktop content">
-    <h2 class="title">BibTeX</h2>
-    <p>If you find our work useful, please cite our paper:</p>
-    <pre><code>Coming soon
-}</code></pre>
+<section class="hero is-light teaser">
+  <div class="container is-widescreen">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column">
+        <br>
+        <h2 class="title is-3">Additional Results</h2>
+        <div class="content has-text-justified">
+        </div>
+        <div class="column is-centered has-text-centered is-widescreen">
+        <img id="more_faces_1" src="static/images/more_faces_1.JPG"/>
+      </div>
+        <div class="column is-centered has-text-centered is-widescreen">
+        <img id="more_faces_2" src="static/images/more_faces_2.JPG"/>
+      </div>
+        <div class="column is-centered has-text-centered is-widescreen">
+        <img id="more_faces_3" src="static/images/more_faces_3.JPG"/>
+      </div>
+        <div class="column is-centered has-text-centered is-widescreen">
+        <img id="more_faces_4" src="static/images/more_faces_4.JPG"/>
+      </div>
+        <div class="column is-centered has-text-centered is-widescreen">
+        <img id="more_faces_5" src="static/images/more_faces_5.JPG"/>
+      </div>
+        <div class="column is-centered has-text-centered is-widescreen">
+        <img id="more_faces_6" src="static/images/more_faces_6.JPG"/>
+      </div>
+      <div class="column is-centered has-text-centered is-max-desktop">
+        <img id="more_faces_identities" src="static/images/inputs_more_faces.JPG"/>
+      </div>
+        <div class="column is-centered has-text-centered is-max-desktop">
+          <p>Additional personalized generation results using our method. The single input image for each identity is shown below.</p>
+        </div>
+      </div>
+    </div>
+    <!--/ Abstract. -->
   </div>
 </section>
+
+<!--<section class="section" id="BibTeX">-->
+<!--  <div class="container is-max-desktop content">-->
+<!--    <h2 class="title">BibTeX</h2>-->
+<!--    <p>If you find our work useful, please cite our paper:</p>-->
+<!--    <pre><code>Coming soon-->
+<!--}</code></pre>-->
+<!--  </div>-->
+<!--</section>-->
+
 <footer class="footer">
   <div class="container">
     <div class="content has-text-centered">
@@ -296,10 +343,11 @@ A further limitation is in increased VRAM requirements. In order to perform infe
     <div class="columns is-centered">
       <div class="column is-8">
         <div class="content">
+          <p>If you want an image removed from this page or have other requests, please contact us at <a href="tuningencoder@gmail.com">tuningencoder@gmail.com</a></p>
           <p>
-            This website is licensed under a <a rel="license"
-                                                href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
-            Commons Attribution-ShareAlike 4.0 International License</a>.
+            Website content is licensed under a <a rel="license"
+                                                href="https://creativecommons.org/licenses/by-nc-sa/4.0/">Creative
+            Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
           </p>
           <p>
             Website source code based on the <a href="https://nerfies.github.io/"> Nerfies</a> project page. If you want to reuse their <a
